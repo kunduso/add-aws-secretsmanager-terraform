@@ -1,22 +1,22 @@
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret
 resource "aws_secretsmanager_secret" "secret_one" {
-  name = "secure_secret_one"
+  name                    = "secure_secret_one"
   recovery_window_in_days = 0
 }
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version
 resource "aws_secretsmanager_secret_version" "secure_one_version" {
   secret_id     = aws_secretsmanager_secret.secret_one.id
-  secret_string = var.SomeOtherSecret 
+  secret_string = var.SomeOtherSecret
   #The value is passed to the Terraform via the CLI
 }
 
 resource "aws_secretsmanager_secret" "db_secrets" {
-  name = "environment/secrets"
+  name                    = "environment/secrets"
   recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_version" "db_secrets_version" {
-  secret_id = aws_secretsmanager_secret.db_secrets.id
+  secret_id     = aws_secretsmanager_secret.db_secrets.id
   secret_string = <<EOF
   {"username": "${var.username}","password":"${var.password}"}
   EOF

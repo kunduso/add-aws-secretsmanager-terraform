@@ -19,16 +19,16 @@ variable "secret_key" {
 #SecretManager secrets variables
 variable "username" {
   description = "The username of the entity"
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 variable "password" {
   description = "The password of the entity"
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
 variable "SomeOtherSecret" {
   description = "Some other secret"
-  type = string
-  sensitive = true
+  type        = string
+  sensitive   = true
 }
