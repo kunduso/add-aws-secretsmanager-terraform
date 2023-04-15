@@ -9,31 +9,31 @@ variable "access_key" {
   description = "The access_key that belongs to the IAM user"
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
 }
 #Define IAM User Secret Key
 variable "secret_key" {
   description = "The secret_key that belongs to the IAM user"
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
 }
 #SecretManager secrets variables
 variable "username" {
   description = "The username of the entity"
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
 }
 variable "password" {
   description = "The password of the entity"
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
 }
 variable "SomeOtherSecret" {
   description = "Some other secret"
   type        = string
   sensitive   = true
-  default = ""
+  default     = ""
 }
