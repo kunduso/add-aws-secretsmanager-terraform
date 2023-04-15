@@ -56,7 +56,11 @@ jobs:
     - name: Terraform Plan
       id: plan
       if: github.ref != 'refs/heads/main' || github.event_name == 'pull_request'
-      run: terraform plan -no-color -input=false
+      run: |
+        terraform plan -no-color -input=false \
+        -var="username=${{ secrets.VARIABLEONE_USERNAME }}" \
+        -var="password=${{ secrets.VARIABLEONE_PASSWORD }}" \
+        -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}"
       continue-on-error: true
 
     - name: Update Pull Request
@@ -93,4 +97,8 @@ jobs:
     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
-      run: terraform apply -auto-approve -input=false
+      run: |
+        terraform apply -auto-approve -input=false \
+        -var="username=${{ secrets.VARIABLEONE_USERNAME }}" \
+        -var="password=${{ secrets.VARIABLEONE_PASSWORD }}" \
+        -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}"
