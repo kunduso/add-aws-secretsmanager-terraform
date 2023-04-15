@@ -1,5 +1,6 @@
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret
 resource "aws_secretsmanager_secret" "secret_one" {
+  #checkov:skip=CKV2_AWS_57: This variable does not need to be rotated
   name                    = "secure_secret_one"
   recovery_window_in_days = 0
 }
@@ -11,6 +12,7 @@ resource "aws_secretsmanager_secret_version" "secure_one_version" {
 }
 
 resource "aws_secretsmanager_secret" "db_secrets" {
+  #checkov:skip=CKV2_AWS_57: This variable does not need to be rotated
   name                    = "environment/secrets"
   recovery_window_in_days = 0
 }
