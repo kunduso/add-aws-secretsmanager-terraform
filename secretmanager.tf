@@ -16,6 +16,7 @@ resource "aws_secretsmanager_secret" "db_secrets" {
   #checkov:skip=CKV2_AWS_57: This variable does not need to be rotated
   name                    = "environment/secrets"
   recovery_window_in_days = 0
+  kms_key_id              = aws_kms_key.local_key.id
 }
 
 resource "aws_secretsmanager_secret_version" "db_secrets_version" {
