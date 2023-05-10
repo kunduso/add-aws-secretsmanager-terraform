@@ -1,3 +1,4 @@
+name: infracost-scan
 # The GitHub Actions docs (https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#on)
 # describe other options for 'on', 'pull_request' is a good default.
 on: [pull_request]
@@ -49,8 +50,9 @@ jobs:
       # Generate Infracost JSON file as the baseline.
       - name: Generate Infracost cost estimate baseline
         run: |
-          pwd
-          infracost breakdown --path=${TF_ROOT} \
+          TFCode=$(pwd)
+          echo $TFCode
+          infracost breakdown --path= \
                               --format=json \
                               --out-file=/tmp/infracost-base.json
 
