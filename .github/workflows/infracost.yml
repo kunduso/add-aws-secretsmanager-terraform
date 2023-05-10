@@ -16,7 +16,7 @@ jobs:
       pull-requests: write
 
     env:
-      TF_ROOT: ${{ GITHUB_WORKSPACE }}
+      TF_ROOT: $GITHUB_WORKSPACE
       # If you're using Terraform Cloud/Enterprise and have variables or private modules stored
       # on there, specify the following to automatically retrieve the variables:
       #   INFRACOST_TERRAFORM_CLOUD_TOKEN: ${{ secrets.TFC_TOKEN }}
