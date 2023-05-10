@@ -51,7 +51,6 @@ jobs:
       - name: Generate Infracost cost estimate baseline
         run: |
           TFCode=$(pwd)
-          echo $TFCode
           infracost breakdown --path=${TFCode} \
                               --format=json \
                               --out-file=/tmp/infracost-base.json
@@ -82,4 +81,4 @@ jobs:
                                      --repo=$GITHUB_REPOSITORY \
                                      --github-token=${{github.token}} \
                                      --pull-request=${{github.event.pull_request.number}} \
-                                     --behavior=update
+                                     --behavior=new
