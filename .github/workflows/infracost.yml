@@ -63,7 +63,7 @@ jobs:
       # Generate an Infracost diff and save it to a JSON file.
       - name: Generate Infracost diff
         run: |
-          pwd
+          TFCode=$(pwd)
           infracost diff --path=${TFCode} \
                           --format=json \
                           --compare-to=/tmp/infracost-base.json \
