@@ -71,8 +71,7 @@ jobs:
       # Generate an Infracost breakdown.
       - name: Generate Infracost breakdown
         run: |
-          infracost breakdown --path=. \
-                              --show-skipped
+          infracost breakdown --path=. --show-skipped
 
       # Posts a comment to the PR using the 'update' behavior.
       # This creates a single comment and updates it. The "quietest" option.
