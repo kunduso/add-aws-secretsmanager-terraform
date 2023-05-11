@@ -68,6 +68,11 @@ jobs:
                           --compare-to=/tmp/infracost-base.json \
                           --out-file=/tmp/infracost.json
 
+      # Generate an Infracost breakdown.
+      - name: Generate Infracost breakdown
+        run: |
+          infracost breakdown --path=.
+
       # Posts a comment to the PR using the 'update' behavior.
       # This creates a single comment and updates it. The "quietest" option.
       # The other valid behaviors are:
