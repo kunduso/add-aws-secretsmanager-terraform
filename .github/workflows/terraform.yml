@@ -73,8 +73,8 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: terraform-planfile
-        path: TFplan.JSON
+        name: terraform-file
+        path: provider.tf
         if-no-files-found: error
 
     # Generate an Infracost diff and save it to a JSON file.
