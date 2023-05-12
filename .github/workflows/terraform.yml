@@ -67,14 +67,15 @@ jobs:
         terraform plan -no-color -input=false \
         -var="username=${{ secrets.VARIABLEONE_USERNAME }}" \
         -var="password=${{ secrets.VARIABLEONE_PASSWORD }}" \
-        -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}"
+        -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}" \
+        -out=TFplan.JSON
       continue-on-error: true
 
-    - name: Generate TF Plan
-      id: generate
+    - name: List files
+      id: list
       if: github.ref != 'refs/heads/main' || github.event_name == 'pull_request'
       run: |
-        ${{ steps.plan.outputs.stdout }} >> TFPlan.JSON
+        ls
 
     - name: Update Pull Request
       uses: actions/github-script@v6
