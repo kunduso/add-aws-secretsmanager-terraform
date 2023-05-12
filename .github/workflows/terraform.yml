@@ -71,11 +71,22 @@ jobs:
         -out=TFplan.JSON
       continue-on-error: true
 
-    - name: List files
-      id: list
-      if: github.ref != 'refs/heads/main' || github.event_name == 'pull_request'
+    # Generate an Infracost diff and save it to a JSON file.
+    - name: Generate Infracost diff
+      if: github.event_name == 'pull_request'
       run: |
-        ls
+        infracost diff --path=TFplan.JSON \
+                        --format=json \
+                        --out-file=/tmp/infracost.json
+
+    - name: Post Infracost comment
+      if: github.event_name == 'pull_request'
+      run: |
+          infracost comment github --path=/tmp/infracost.json \
+                                    --repo=$GITHUB_REPOSITORY \
+                                    --github-token=${{github.token}} \
+                                    --pull-request=${{github.event.pull_request.number}} \
+                                    --behavior=new
 
     - name: Update Pull Request
       uses: actions/github-script@v6
