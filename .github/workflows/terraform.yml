@@ -71,6 +71,11 @@ jobs:
         -out=TFplan.JSON
       continue-on-error: true
 
+    - uses: actions/upload-artifact@v3
+      with:
+        name: terraform-planfile
+        path: TFplan.JSON
+
     # Generate an Infracost diff and save it to a JSON file.
     - name: Generate Infracost diff
       if: github.event_name == 'pull_request'
