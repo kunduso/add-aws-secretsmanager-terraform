@@ -75,6 +75,7 @@ jobs:
       with:
         name: terraform-planfile
         path: TFplan.JSON
+        if-no-files-found: error
 
     # Generate an Infracost diff and save it to a JSON file.
     - name: Generate Infracost diff
