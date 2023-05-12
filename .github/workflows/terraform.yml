@@ -39,6 +39,13 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
+    - name: Setup Infracost
+      uses: infracost/actions/setup@v2
+      # See https://github.com/infracost/actions/tree/master/setup for other inputs
+      # If you can't use this action, see Docker images in https://infracost.io/cicd
+      with:
+        api-key: ${{ secrets.INFRACOST_API_KEY }}
+  
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
@@ -62,6 +69,12 @@ jobs:
         -var="password=${{ secrets.VARIABLEONE_PASSWORD }}" \
         -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}"
       continue-on-error: true
+
+    - name: Generate TF Plan
+      id: generate
+      if: github.ref != 'refs/heads/main' || github.event_name == 'pull_request'
+      run: |
+        ${{ steps.plan.outputs.stdout }} >> TFPlan.JSON
 
     - name: Update Pull Request
       uses: actions/github-script@v6
