@@ -39,6 +39,13 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
+    - name: Setup Infracost
+      uses: infracost/actions/setup@v2
+      # See https://github.com/infracost/actions/tree/master/setup for other inputs
+      # If you can't use this action, see Docker images in https://infracost.io/cicd
+      with:
+        api-key: ${{ secrets.INFRACOST_API_KEY }}
+  
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
@@ -60,14 +67,38 @@ jobs:
         terraform plan -no-color -input=false \
         -var="username=${{ secrets.VARIABLEONE_USERNAME }}" \
         -var="password=${{ secrets.VARIABLEONE_PASSWORD }}" \
-        -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}"
+        -var="SomeOtherSecret=${{ secrets.VARIABLEONE }}" \
+        -out=TFplan.JSON
       continue-on-error: true
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: terraform-file
+        path: provider.tf
+        if-no-files-found: error
+
+    # Generate an Infracost diff and save it to a JSON file.
+    - name: Generate Infracost diff
+      if: github.event_name == 'pull_request'
+      run: |
+        infracost diff --path=TFplan.JSON \
+                        --format=json \
+                        --out-file=/tmp/infracost.json
+
+    - name: Post Infracost comment
+      if: github.event_name == 'pull_request'
+      run: |
+          infracost comment github --path=/tmp/infracost.json \
+                                    --repo=$GITHUB_REPOSITORY \
+                                    --github-token=${{github.token}} \
+                                    --pull-request=${{github.event.pull_request.number}} \
+                                    --behavior=new
 
     - name: Update Pull Request
       uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       env:
-        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        PLAN: "${{ steps.plan.outputs.stdout }}"
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
