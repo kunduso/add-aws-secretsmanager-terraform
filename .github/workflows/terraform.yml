@@ -45,6 +45,7 @@ jobs:
       # If you can't use this action, see Docker images in https://infracost.io/cicd
       with:
         api-key: ${{ secrets.INFRACOST_API_KEY }}
+      if: github.event_name == 'pull_request'
   
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -71,12 +72,6 @@ jobs:
         -out=TFplan.JSON
       continue-on-error: true
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: terraform-file
-        path: provider.tf
-        if-no-files-found: error
-
     # Generate an Infracost diff and save it to a JSON file.
     - name: Generate Infracost diff
       if: github.event_name == 'pull_request'
@@ -85,7 +80,7 @@ jobs:
                         --format=json \
                         --out-file=/tmp/infracost.json
 
-    - name: Post Infracost comment
+    - name: Post Infracost estimate
       if: github.event_name == 'pull_request'
       run: |
           infracost comment github --path=/tmp/infracost.json \
@@ -94,7 +89,7 @@ jobs:
                                     --pull-request=${{github.event.pull_request.number}} \
                                     --behavior=new
 
-    - name: Update Pull Request
+    - name: Post Terraform Plan output
       uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
       env:
