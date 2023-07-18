@@ -82,6 +82,7 @@ jobs:
 
     # Generate an Infracost breakdown.
     - name: Generate Infracost breakdown
+      if: github.event_name == 'pull_request'
       run: |
         infracost breakdown --path=. --show-skipped
 
