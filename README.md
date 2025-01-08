@@ -17,6 +17,46 @@ Review the code including the [`terraform.yml`](./.github/workflows/terraform.ym
 <br />If you want to check the pipeline logs, click on the **Build Badge** (terrform-infra-provisioning) above the image in this ReadMe.
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.31.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.31.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_kms_key.local_key](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/kms_key) | resource |
+| [aws_secretsmanager_secret.db_secrets](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.secret_one](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret_version.db_secrets_version](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_secretsmanager_secret_version.secure_one_version](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret_version) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_SomeOtherSecret"></a> [SomeOtherSecret](#input\_SomeOtherSecret) | Some other secret | `string` | `""` | no |
+| <a name="input_access_key"></a> [access\_key](#input\_access\_key) | The access\_key that belongs to the IAM user | `string` | `""` | no |
+| <a name="input_password"></a> [password](#input\_password) | The password of the entity | `string` | `""` | no |
+| <a name="input_region"></a> [region](#input\_region) | Infrastructure region | `string` | `"us-east-2"` | no |
+| <a name="input_secret_key"></a> [secret\_key](#input\_secret\_key) | The secret\_key that belongs to the IAM user | `string` | `""` | no |
+| <a name="input_username"></a> [username](#input\_username) | The username of the entity | `string` | `""` | no |
+
+## Outputs
+
+No outputs.
 <!-- END_TF_DOCS -->
 ## Contributing
 If you find any issues or have suggestions for improvement, feel free to open an issue or submit a pull request. Contributions are always welcome!
