@@ -21,13 +21,13 @@ Review the code including the [`terraform.yml`](./.github/workflows/terraform.ym
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.31.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.82.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.31.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
 
 ## Modules
 
@@ -37,11 +37,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_kms_key.local_key](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/kms_key) | resource |
-| [aws_secretsmanager_secret.db_secrets](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret.secret_one](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret_version.db_secrets_version](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret_version) | resource |
-| [aws_secretsmanager_secret_version.secure_one_version](https://registry.terraform.io/providers/hashicorp/aws/5.31.0/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_kms_key.local_key](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_key) | resource |
+| [aws_secretsmanager_secret.db_secrets](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.secret_one](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret_version.db_secrets_version](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_secretsmanager_secret_version.secure_one_version](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret_version) | resource |
 
 ## Inputs
 
