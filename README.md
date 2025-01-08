@@ -37,11 +37,14 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_kms_alias.key](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_alias) | resource |
 | [aws_kms_key.local_key](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_key) | resource |
+| [aws_kms_key_policy.encrypt_kms](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_key_policy) | resource |
 | [aws_secretsmanager_secret.db_secrets](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret) | resource |
 | [aws_secretsmanager_secret.secret_one](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret) | resource |
 | [aws_secretsmanager_secret_version.db_secrets_version](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret_version) | resource |
 | [aws_secretsmanager_secret_version.secure_one_version](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
 
