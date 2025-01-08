@@ -15,5 +15,10 @@ Review the code including the [`terraform.yml`](./.github/workflows/terraform.ym
 <br/>I also have a static code analysis enabled in this repository using Checkov. The scan result is accessible at [checkov-scan.](https://github.com/kunduso/add-aws-secretsmanager-terraform/actions/workflows/code-scan.yml)
 <br/>If you want to learn more about how to enable Checkov static analysis checks for `terraform` code in your repository, you may read that at [automate-terraform-configuration-scan-with-checkov-and-github-actions.](http://skundunotes.com/2023/04/12/automate-terraform-configuration-scan-with-checkov-and-github-actions/)
 <br />If you want to check the pipeline logs, click on the **Build Badge** (terrform-infra-provisioning) above the image in this ReadMe.
+
+<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
+## Contributing
+If you find any issues or have suggestions for improvement, feel free to open an issue or submit a pull request. Contributions are always welcome!
 ## License
-This code is released under the Unlincse License. See [LICENSE](LICENSE).
+This code is released under the Unlicense License. See [LICENSE](LICENSE).
