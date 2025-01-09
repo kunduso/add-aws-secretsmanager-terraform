@@ -19,6 +19,15 @@ resource "aws_kms_key_policy" "encrypt_kms" {
     Version = "2012-10-17"
     Statement = [
       {
+        Sid    = "Enable IAM User Permissions"
+        Effect = "Allow"
+        Principal = {
+          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        }
+        Action   = "kms:*"
+        Resource = "*"
+      },
+      {
         Sid    = "Allow access through AWS Secrets Manager for all principals in the account that are authorized to use AWS Secrets Manager"
         Effect = "Allow"
         Principal = {
