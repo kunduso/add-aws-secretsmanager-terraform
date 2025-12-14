@@ -24,8 +24,27 @@ resource "aws_kms_key_policy" "encrypt_kms" {
         Principal = {
           AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
         }
-        Action   = "kms:*"
-        Resource = "*"
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:ReEncrypt*",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey",
+          "kms:Create*",
+          "kms:Enable*",
+          "kms:List*",
+          "kms:Put*",
+          "kms:Update*",
+          "kms:Revoke*",
+          "kms:Disable*",
+          "kms:Get*",
+          "kms:Delete*",
+          "kms:ScheduleKeyDeletion",
+          "kms:CancelKeyDeletion",
+          "kms:TagResource",
+          "kms:UntagResource"
+        ]
+        Resource = [aws_kms_key.local_key.arn]
       },
       {
         Sid    = "Allow access through AWS Secrets Manager for all principals in the account that are authorized to use AWS Secrets Manager"
@@ -40,7 +59,7 @@ resource "aws_kms_key_policy" "encrypt_kms" {
           "kms:CreateGrant",
           "kms:DescribeKey"
         ]
-        Resource = "*"
+        Resource = [aws_kms_key.local_key.arn]
         Condition = {
           StringEquals = {
             "kms:CallerAccount" = "${data.aws_caller_identity.current.account_id}"
@@ -55,7 +74,7 @@ resource "aws_kms_key_policy" "encrypt_kms" {
           AWS = ["*"]
         }
         Action   = "kms:GenerateDataKey*"
-        Resource = "*"
+        Resource = [aws_kms_key.local_key.arn]
         Condition = {
           StringEquals = {
             "kms:CallerAccount" = "${data.aws_caller_identity.current.account_id}"
