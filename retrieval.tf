@@ -7,7 +7,7 @@ ephemeral "aws_secretsmanager_secret_version" "write_only_retrieved" {
 }
 
 resource "aws_ssm_parameter" "retrieved_secret" {
-  name  = "/database/password/master"
+  name  = "/${var.name}/retrieved_secret"
   type  = "SecureString"
   value_wo = ephemeral.aws_secretsmanager_secret_version.write_only_retrieved.secret_string
   value_wo_version = 1

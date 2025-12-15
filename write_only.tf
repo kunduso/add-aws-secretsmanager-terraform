@@ -12,7 +12,7 @@ ephemeral "random_password" "write_only_password" {
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret
 resource "aws_secretsmanager_secret" "write_only_secret" {
   #checkov:skip=CKV2_AWS_57: This variable does not need to be rotated
-  name                    = "write_only_secret"
+  name                    = "/${var.name}/write_only_secret"
   recovery_window_in_days = 0
   kms_key_id              = aws_kms_key.local_key.id
 }

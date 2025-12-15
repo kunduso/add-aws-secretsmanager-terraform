@@ -18,6 +18,11 @@ variable "secret_key" {
   sensitive   = true
   default     = ""
 }
+variable "name" {
+  description = "The name of the application."
+  type        = string
+  default     = "app-17"
+}
 #SecretManager secrets variables
 variable "username" {
   description = "The username of the entity"

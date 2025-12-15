@@ -1,13 +1,13 @@
 data "aws_caller_identity" "current" {}
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key
 resource "aws_kms_key" "local_key" {
-  description             = "KMS key for AWS Secrets Manager"
+  description             = "KMS key for AWS Secrets Manager ${var.name}."
   deletion_window_in_days = 7
   enable_key_rotation     = true
 }
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias
 resource "aws_kms_alias" "key" {
-  name          = "alias/secret-encryption"
+  name          = "alias/${var.name}"
   target_key_id = aws_kms_key.local_key.id
 }
 #https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html#security-encryption-policies
