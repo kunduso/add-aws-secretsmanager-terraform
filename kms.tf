@@ -1,7 +1,7 @@
 data "aws_caller_identity" "current" {}
 #https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key
 resource "aws_kms_key" "local_key" {
-  description             = "KMS key for AWS Secrets Manager ${var.name}."
+  description             = "KMS key for ${var.name} resources."
   deletion_window_in_days = 7
   enable_key_rotation     = true
 }
@@ -47,10 +47,13 @@ resource "aws_kms_key_policy" "encrypt_kms" {
         Resource = [aws_kms_key.local_key.arn]
       },
       {
-        Sid    = "Allow access through AWS Secrets Manager for all principals in the account that are authorized to use AWS Secrets Manager"
+        Sid    = "Allow AWS Services Access"
         Effect = "Allow"
         Principal = {
-          AWS = ["*"]
+          Service = [
+            "secretsmanager.${var.region}.amazonaws.com",
+            "ssm.${var.region}.amazonaws.com"
+          ]
         }
         Action = [
           "kms:Encrypt",
@@ -63,40 +66,14 @@ resource "aws_kms_key_policy" "encrypt_kms" {
         Condition = {
           StringEquals = {
             "kms:CallerAccount" = "${data.aws_caller_identity.current.account_id}"
-            "kms:ViaService"    = "secretsmanager.${var.region}.amazonaws.com"
+          }
+          "ForAnyValue:StringEquals" = {
+            "kms:ViaService" = [
+              "secretsmanager.${var.region}.amazonaws.com",
+              "ssm.${var.region}.amazonaws.com"
+            ]
           }
         }
-      },
-      {
-        Sid    = "Allow access through AWS Secrets Manager for all principals in the account that are authorized to use AWS Secrets Manager"
-        Effect = "Allow"
-        Principal = {
-          AWS = ["*"]
-        }
-        Action   = "kms:GenerateDataKey*"
-        Resource = [aws_kms_key.local_key.arn]
-        Condition = {
-          StringEquals = {
-            "kms:CallerAccount" = "${data.aws_caller_identity.current.account_id}"
-          }
-          StringLike = {
-            "kms:ViaService" = "secretsmanager.${var.region}.amazonaws.com"
-          }
-        }
-      },
-      {
-        Sid    = "Allow direct access to key metadata to the account"
-        Effect = "Allow"
-        Principal = {
-          AWS = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
-        }
-        Action = [
-          "kms:Describe*",
-          "kms:Get*",
-          "kms:List*",
-          "kms:RevokeGrant"
-        ]
-        Resource = "*"
       }
     ]
   })
