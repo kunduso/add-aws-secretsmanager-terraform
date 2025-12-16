@@ -23,5 +23,5 @@ resource "aws_secretsmanager_secret" "write_only_secret" {
 resource "aws_secretsmanager_secret_version" "write_only_version" {
   secret_id                = aws_secretsmanager_secret.write_only_secret.id
   secret_string_wo         = ephemeral.random_password.write_only_password.result
-  secret_string_wo_version = 1
+  secret_string_wo_version = var.wo_version
 }

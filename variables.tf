@@ -42,3 +42,8 @@ variable "SomeOtherSecret" {
   sensitive   = true
   default     = ""
 }
+variable "wo_version" {
+  description = "The version of the secret to retrieve."
+  type        = number
+  default     = 1
+}
