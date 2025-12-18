@@ -21,13 +21,14 @@ Review the code including the [`terraform.yml`](./.github/workflows/terraform.ym
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.82.2 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 6.26.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.7.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.26.0 |
 
 ## Modules
 
@@ -37,14 +38,17 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_kms_alias.key](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_alias) | resource |
-| [aws_kms_key.local_key](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_key) | resource |
-| [aws_kms_key_policy.encrypt_kms](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/kms_key_policy) | resource |
-| [aws_secretsmanager_secret.db_secrets](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret.secret_one](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret) | resource |
-| [aws_secretsmanager_secret_version.db_secrets_version](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret_version) | resource |
-| [aws_secretsmanager_secret_version.secure_one_version](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/resources/secretsmanager_secret_version) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/5.82.2/docs/data-sources/caller_identity) | data source |
+| [aws_kms_alias.key](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/kms_alias) | resource |
+| [aws_kms_key.local_key](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/kms_key) | resource |
+| [aws_kms_key_policy.encrypt_kms](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/kms_key_policy) | resource |
+| [aws_secretsmanager_secret.db_secrets](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.secret_one](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret.write_only_secret](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret_version.db_secrets_version](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_secretsmanager_secret_version.secure_one_version](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_secretsmanager_secret_version.write_only_version](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/secretsmanager_secret_version) | resource |
+| [aws_ssm_parameter.retrieved_secret](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/resources/ssm_parameter) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/6.26.0/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
 
@@ -52,10 +56,12 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_SomeOtherSecret"></a> [SomeOtherSecret](#input\_SomeOtherSecret) | Some other secret | `string` | `""` | no |
 | <a name="input_access_key"></a> [access\_key](#input\_access\_key) | The access\_key that belongs to the IAM user | `string` | `""` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the application. | `string` | `"app-17"` | no |
 | <a name="input_password"></a> [password](#input\_password) | The password of the entity | `string` | `""` | no |
 | <a name="input_region"></a> [region](#input\_region) | Infrastructure region | `string` | `"us-east-2"` | no |
 | <a name="input_secret_key"></a> [secret\_key](#input\_secret\_key) | The secret\_key that belongs to the IAM user | `string` | `""` | no |
 | <a name="input_username"></a> [username](#input\_username) | The username of the entity | `string` | `""` | no |
+| <a name="input_wo_version"></a> [wo\_version](#input\_wo\_version) | The version of the secret to retrieve. | `number` | `1` | no |
 
 ## Outputs
 
